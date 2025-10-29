@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  terminal-adventure:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: terminal-adventure
+    hostname: terminal-adventure
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./src/levels:/opt/levels:ro
+      - ./config:/opt/config:ro
+    working_dir: /home/level1
+    command: ["/bin/bash", "-c", "chmod +x /opt/levels/*/setup.sh && /opt/levels/level1/setup.sh && tail -f /dev/null"]
+    environment:
+      - TERM=xterm-256color
+      - DEBIAN_FRONTEND=noninteractive
+    privileged: false
+    read_only: false
+    tmpfs:
+      - /tmp
+      - /run
+      - /var/tmp
+
+  # Optional: Web-based terminal access (if needed)
+  web-terminal:
+    image: linuxserver/webtop:ubuntu-xfice
+    container_name: web-terminal
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+    volumes:
+      - ./web-data:/config
+    ports:
+      - "3000:3000"
+    depends_on:
+      - terminal-adventure
+    restart: unless-stopped
+
+networks:
+  default:
+    name: terminal-adventure-net
+    driver: bridge
