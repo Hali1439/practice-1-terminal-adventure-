@@ -1,0 +1,96 @@
+# Version control
+.git
+.gitignore
+.github
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Log files
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build artifacts
+dist/
+build/
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Backup files
+*.bak
+*.backup
+
+# Config files (except what we need)
+config/**/*
+!config/sudoers/
+!config/cron/
+
+# Test files (keep for development)
+# tests/
+
+# Level data (we'll mount these as volumes)
+src/levels/**/*
+!src/levels/level1/
+!src/levels/level1/Dockerfile
+!src/levels/level1/setup.sh
+
+# Utility scripts (we want to copy these)
+utils/
+
+# Specific file types to ignore
+*.db
+*.sqlite
+*.tar
+*.gz
+*.zip
+
+# Large files (over 10MB)
+*/*.mp4
+*/*.avi
+*/*.mov
+*/*.pdf
+*/*.iso
+
+# Sensitive files
+*.key
+*.pem
+*.crt
+*.env
+secrets/
+credentials/
+
+# Development only
+.devcontainer/
+.cache/
